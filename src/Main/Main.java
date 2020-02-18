@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Stack;
 
 import Model.Employee;
+import Model.NameComparator;
+import Model.SalaryComparator;
 
 public class Main {
 	public static void main(String[] args) {
@@ -26,6 +28,8 @@ public class Main {
 		
 		// Task 4
 		char[] charArr = new char[] {'a', 'b', 'c', 'd', 'e'};
+		String input = "abcde";
+		System.out.println(reverseAddFront(input));
 		
 		// Task 5
 		// Task 5
@@ -37,15 +41,25 @@ public class Main {
 		// Sort the list of employee again with comparator
 		List<Employee> empList = new LinkedList<Employee>();
 		empList.add(new Employee(0, "John", 24, 40000));
-		empList.add(new Employee(1, "Dave", 26, 40000));
-		empList.add(new Employee(2, "Mary", 44, 40000));
-		empList.add(new Employee(3, "Katy", 31, 40000));
-		empList.add(new Employee(4, "Joe", 18, 40000));
+		empList.add(new Employee(1, "Dave", 26, 20000));
+		empList.add(new Employee(2, "Mary", 44, 30000));
+		empList.add(new Employee(3, "Katy", 31, 50000));
+		empList.add(new Employee(4, "Joe", 18, 10000));
 		
+		System.out.println("--- Sorted by Age ---");
 		empList.stream().sorted().forEach(e -> System.out.println(e.toString()));
+		
+		System.out.println("--- Sorted by Salary ---");
 
+		Collections.sort(empList, new SalaryComparator());
 
+		empList.stream().forEach(e -> System.out.println(e.toString()));
+		
+		System.out.println("--- Sorted by Name ---");
+		
+		Collections.sort(empList, new NameComparator());
 
+		empList.stream().forEach(e -> System.out.println(e.toString()));
 	}
 
 	// Task 1
@@ -83,15 +97,15 @@ public class Main {
 	
 	// Task 4
 	// abcde -> edcbaabcde
-	public static char[] reverseAddFront(char[] chars) {
+	public static String reverseAddFront(String s) {
 		Deque<Character> dq = new LinkedList<Character>();
 		
-		for (int i = 0; i < chars.length; i++) {
-			dq.addFirst(chars[i]);
-			dq.addLast(chars[i]);
+		for (int i = 0; i < s.length(); i++) {
+			dq.addFirst(s.charAt(i));
+			dq.addLast(s.charAt(i));
 		}
 		
-		return chars;
+		return dq.toString();
 	}
 	
 	// Task 5
